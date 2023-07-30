@@ -16,7 +16,7 @@ export const events: ActivityEvent[] = [
     target_name: "ali@instatus.com",
     location: "105.40.62.95",
     occurred_at: "2022-01-05T14:31:13.607Z",
-    metadata: {
+    meta_data: {
       redirect: "/setup",
       description: "User login succeeded.",
       x_request_id: "req_W1Y13QOHMI5H",

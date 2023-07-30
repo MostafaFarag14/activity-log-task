@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -11,15 +12,32 @@ datasource db {
 }
 
 model Event {
-  id          Int    @id @default(autoincrement())
-  object      String
-  actor_id    String
-  actor_name  String
-  group       String
-  // action String
-  target_id   String
-  target_name String
-  location    String
-  occurred_at String
-  // metadata
+  id            String         @id @default(uuid())
+  object        String         @default("event")
+  actor_id      String
+  actor_name    String
+  group         String
+  action        EventAction    @relation(fields: [eventActionId], references: [id])
+  eventActionId String
+  target_id     String
+  target_name   String
+  location      String
+  occurred_at   DateTime       @default(now())
+  meta_data     EventMetaData?
+}
+
+model EventMetaData {
+  id           String @id @default(uuid())
+  redirect     String
+  description  String
+  x_request_id String
+  event        Event  @relation(fields: [eventId], references: [id])
+  eventId      String @unique
+}
+
+model EventAction {
+  id     String  @id @default(uuid())
+  object String  @default("event_action")
+  name   String
+  Event  Event[]
 }
