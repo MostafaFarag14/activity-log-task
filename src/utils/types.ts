@@ -3,7 +3,7 @@ export interface ActivityEvent {
   object: "event";
   actor_id: string;
   actor_name: string;
-  group: "instatus.com";
+  group: string;
   action: {
     id: string;
     object: "event_action";

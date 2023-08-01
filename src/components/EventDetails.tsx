@@ -1,5 +1,6 @@
 import { ActivityEvent } from "@/utils/types";
 import React from "react";
+import moment from "moment";
 
 interface EventDetailsProps {
   event: ActivityEvent;
@@ -54,7 +55,7 @@ function EventDetails({ event }: EventDetailsProps) {
         <ul>
           <li className="flex flex-row justify-between">
             <p className="text-text-color-1">Readable</p>
-            <p>{new Date(occurred_at).toLocaleString()}</p>
+            <p>{moment(occurred_at).format("MMM D, h:mm A")}</p>
           </li>
         </ul>
       </div>
